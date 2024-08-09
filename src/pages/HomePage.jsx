@@ -12,12 +12,14 @@ export default function HomePage(){
       
         return (
           <>
+
             <input type="text" name="formUsername" id="formUsername" value={formUsername} onChange={(event) => setFormUsername(event.target.value)} />
             <input type="password" name="formPassword" id="formPassword" value={formPassword} onChange={(event) => setFormPassword(event.target.value)} />
       
-            <button onClick={() => makeSignupRequest(formUsername, formPassword)}>
+            <button id="LoginButton" onClick={() => makeSignupRequest(formUsername, formPassword)}>
               Create a user
             </button>
+
           </>
         )
       }
