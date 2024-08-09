@@ -1,6 +1,9 @@
-import { useState } from 'react'
-import './App.css'
-import { useUserData, useUserDispatch } from './contexts/UserContext'
+import { Route, Routes } from "react-router-dom";
+import { useState } from 'react';
+import './styles/App.css';
+import { useUserData, useUserDispatch } from './contexts/UserContext';
+import Template from "./pages/_TemplagePage";
+import HomePage from "./pages/HomePage";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -11,14 +14,11 @@ function App() {
   const {makeSignupRequest} = useUserDispatch();
 
   return (
-    <>
-      <input type="text" name="formUsername" id="formUsername" value={formUsername} onChange={(event) => setFormUsername(event.target.value)} />
-      <input type="password" name="formPassword" id="formPassword" value={formPassword} onChange={(event) => setFormPassword(event.target.value)} />
-
-      <button onClick={() => makeSignupRequest(formUsername, formPassword)}>
-        Create a user
-      </button>
-    </>
+    <Routes>
+      <Route path="/" element={<Template />} >
+        <Route index element={<HomePage />} />
+      </Route>
+    </Routes>
   )
 }
 
