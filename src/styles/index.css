@@ -15,21 +15,3 @@ body {
   justify-content: space-around;
 }
 
-body#LoginPage{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-input#formUsername {
-  width: 10rem;
-}
-
-input#formPassword{
-  width: 10rem;
-}
-
-#LoginButton{
-  width: 7rem;
-}
-
