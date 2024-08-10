@@ -1,0 +1,27 @@
+#InvTable {
+    /* display: flex; */
+    width: 20rem;
+    align-self: center;
+    align-items: center;
+    background-color: gray;
+}
+
+table {
+    border: 2px solid black;
+    width: flex;
+    height: 3rem;
+}
+
+th {
+    border-bottom: 1px solid black;
+}
+
+td {
+    border: 1px solid black;
+    text-align: center;
+}
+
+
+#InvFoot {
+    justify-self: right;
+  }
