@@ -1,21 +1,21 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useUserDispatch } from "../contexts/UserContext";
-import "../styles/HomePage.css"
+import { useEffect, useState } from "react";
+import Characters from "../contexts/CharacterContext";
 
 
-export default function HomePage(){
+export default function CharacterPage(){
 
-        const [formUsername, setFormUsername] = useState("");
-        const [formPassword, setFormPassword] = useState("");
-        
-        const {makeSignupRequest} = useUserDispatch();
-      
-        return (
-          <>
-          <div id="CharacterBody">
+    const [character, setCharacter] = useState([]);
+  
+    useEffect(() => {
+      fetch("http://localhost:3000/character/all")
+      .then(resp => resp.json())
+      .then(data => setCharacter(data.data))
+    }, [setCharacter])
 
-          </div>
-          </>
-        )
-      }
+    return (
+      <div>
+        {/* passing data into the Characters component to render character select and create */}
+        <Characters characters={character} />
+      </div>
+    );
+}
