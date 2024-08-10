@@ -9,10 +9,6 @@ export default function Header(){
             <div>
                 Inventory Mimic
             </div>
-            <nav id="headerNavbar">
-                <NavLink to={"/"}>Homepage</NavLink>
-                <NavLink>Test</NavLink>
-            </nav>
         </header>
     )
 }

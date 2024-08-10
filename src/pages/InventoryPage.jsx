@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import Inventories from "../components/Inventories";
+import Inventories from "../contexts/InventoryContext";
 
 
 export default function InventoryPage() {
 
     // Settting inventory state
     const [inventory, setInventory] = useState([]);
+
 
     // Fetching inventory data from "GET"
     useEffect(() => {

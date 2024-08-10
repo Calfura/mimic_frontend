@@ -1,11 +1,14 @@
 import React from "react";
-import InventoryTable from "./Inventory";
+import InventoryTable from "../components/Inventory";
 import "../styles/InventoryPage.css"
 
 
 export default function Inventories({inventories}) {
 
     console.log("Inventory talbes: ", inventories)
+
+    const inventoryArray = [inventories]
+    console.log("Test arry",inventoryArray)
 
     return (
         <div id="InvTable">
@@ -26,8 +29,21 @@ export default function Inventories({inventories}) {
                 </tbody>
                 <tfoot id="InvFoot">
                     <tr>
-                        <td>Test</td>
-                        <td>testtwo</td>
+                        <td id="weightText">Weight:</td>
+                        {Object.values(inventoryArray).map(values => {
+                            console.log(values, "weight")
+                            var weightTotal = 0;
+                            for (let i = 0; i < values.length; i++) {
+                                weightTotal += values[i].weight;
+                                console.log(values[i].weight, "increase index", weightTotal)
+                                weightTotal + values[i].weight + i;
+                                }
+                            return (
+                                <td>
+                                    {weightTotal}
+                                </td>
+                                )}
+                            )}
                     </tr>
                 </tfoot> 
             </table>
