@@ -1,5 +1,5 @@
 #InvTable {
-    /* display: flex; */
+    display: flex;
     width: 20rem;
     align-self: center;
     align-items: center;
@@ -8,7 +8,7 @@
 
 table {
     border: 2px solid black;
-    width: flex;
+    width: 100%;
     height: 3rem;
 }
 

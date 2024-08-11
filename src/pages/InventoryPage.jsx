@@ -5,20 +5,31 @@ import Inventories from "../contexts/InventoryContext";
 export default function InventoryPage() {
 
     // Settting inventory state
-    const [inventory, setInventory] = useState([]);
+    const [inventories, setInventories] = useState([]);
 
 
     // Fetching inventory data from "GET"
     useEffect(() => {
         fetch("http://localhost:3000/inventory/all")
         .then(resp => resp.json())
-        .then(data => setInventory(data.data))
-    }, [setInventory])
+        .then(data => setInventories(data.data))
+    }, [setInventories])
+
+    function updateInventory(updatedInventory) {
+        const updatedInventories = inventories.map(
+            inventory => {
+                if (inventory.id === updatedInventory.id) {
+                    return updatedInventory
+                } else {return inventory}
+        })
+        setInventories(updatedInventory)
+    }
 
     return (
         <div>
             {/* passing data to thhe Inventories component to create a visable table */}
-            <Inventories inventories={inventory} />
+            <Inventories inventories={inventories}
+            updateInventory={updateInventory} />
         </div>
     );
 }

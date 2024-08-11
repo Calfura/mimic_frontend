@@ -1,9 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import InventoryTable from "../components/Inventory";
+import EditInventory from "../functions/EditInventory";
 import "../styles/InventoryPage.css"
 
 
 export default function Inventories({inventories}) {
+
+    const [isEditing, setIsEditing] = useState(false);
+    
+    const [editForm, setEditForm] = useState({
+        item: "",
+        description: "",
+        weight: ""
+    })
+
+    function handleUserUpdate(updatedInventory) {
+        setIsEditing(false);
+        updatedInventory(updatedInventory);
+    }
+
+    function handleChange(event) {
+        setEditForm({
+            ...editForm, [event.target.item]: event.target.value
+        })
+    }
+
+    function changeEditState(inventory) {
+        if (inventory.id === editForm.id) {
+            setIsEditing(isEditing => !isEditing)
+        } else if (isEditing === false) {
+            setIsEditing(isEditing => !isEditing)
+        }
+    }
+
+    function captureEdit(clickedInventory) {
+        let filtered = inventories && inventories.filter
+        (inventory => inventory.id === clickedInventory.id)
+        setEditForm(filtered[0])
+    }
 
     console.log("Inventory talbes: ", inventories)
 
@@ -12,6 +46,12 @@ export default function Inventories({inventories}) {
 
     return (
         <div id="InvTable">
+            {isEditing?
+            (<EditInventory
+                editForm={editForm}
+                handleChange={handleChange}
+                handleUserUpdate={handleUserUpdate}
+            />) : null}
             <table>
                 <thead>
                     <tr>
@@ -24,12 +64,18 @@ export default function Inventories({inventories}) {
                 <tbody>
                     {/* iterate through the Inventory datatable and renders it */}
                     {
-                        inventories && inventories.map(inventory => <InventoryTable key={inventory._id} inventory={inventory} />)
+                        inventories && inventories.map(inventory =>
+                            <InventoryTable
+                            key={inventory._id}
+                            inventory={inventory}
+                            captureEdit={captureEdit}
+                            changeEditState={changeEditState}
+                             />)
                     }
                 </tbody>
                 <tfoot id="InvFoot">
                     <tr>
-                        <td id="weightText">Weight:</td>
+                        {/* <td id="weightText">Weight:</td>
                         {Object.values(inventoryArray).map(values => {
                             console.log(values, "weight")
                             var weightTotal = 0;
@@ -43,7 +89,7 @@ export default function Inventories({inventories}) {
                                     {weightTotal}
                                 </td>
                                 )}
-                            )}
+                            )} */}
                     </tr>
                 </tfoot> 
             </table>

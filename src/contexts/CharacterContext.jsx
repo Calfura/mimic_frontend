@@ -18,14 +18,12 @@ export default function Characters({characters}) {
                 </thead>
                 <tbody>
                     {/* iterate through the character datatable and render it */}
-                    <button>
                     {
                         characters && characters.map(character =>
                             <CharacterTable key={character._id}
                             character={character} />
                         )
                     }
-                    </button>
                 </tbody>
             </table>
         </div>
