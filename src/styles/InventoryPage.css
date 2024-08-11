@@ -8,7 +8,7 @@
 
 table {
     border: 2px solid black;
-    width: 100%;
+    width: flex;
     height: 3rem;
 }
 

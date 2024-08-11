@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, createContext, useContext } from "react";
 
 
@@ -61,13 +62,7 @@ export default function UserProvider({children}){
         let bodyData = { username, password };
 
         try {
-            let response = await fetch("http://localhost:3000/users/jwt", {
-                method: "POST",
-                body: JSON.stringify(bodyData),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            });
+            let response = await axios.post(`http://localhost:3000/users/jwt`, bodyData);
 
             const loginResult = response.data;
             console.log("Fetch", response)
@@ -98,7 +93,7 @@ export default function UserProvider({children}){
     const logout = () => {
         storeUserJwt("");
         storeDecodedJwt({});
-        storeIsLoggedIn(false);
+        storeLoggedIn(false);
         storeUserId(null);
     }
     

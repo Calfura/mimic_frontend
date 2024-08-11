@@ -22,7 +22,7 @@ export default function InventoryPage() {
                     return updatedInventory
                 } else {return inventory}
         })
-        setInventories(updatedInventory)
+        setInventories(updatedInventories)
     }
 
     return (

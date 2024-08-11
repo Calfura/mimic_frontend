@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import InventoryTable from "../components/Inventory";
 import EditInventory from "../functions/EditInventory";
 import "../styles/InventoryPage.css"
 
+const ItemDataContext = createContext(null);
+const ItemDispatchContext = createContext(null);
 
-export default function Inventories({inventories}) {
+export function useItemData(){
+    return useContext(ItemDataContext)
+};
+
+export function useItemDispatch(){
+    return useContext(ItemDispatchContext);
+};
+
+export default function Inventories({inventories, updateInventory}) {
 
     const [isEditing, setIsEditing] = useState(false);
-    
     const [editForm, setEditForm] = useState({
+        id: "",
         item: "",
         description: "",
         weight: ""
@@ -16,12 +26,13 @@ export default function Inventories({inventories}) {
 
     function handleUserUpdate(updatedInventory) {
         setIsEditing(false);
-        updatedInventory(updatedInventory);
+        updateInventory(updatedInventory);
     }
 
     function handleChange(event) {
         setEditForm({
-            ...editForm, [event.target.item]: event.target.value
+            ...editForm,
+            [event.target._id]: event.target.value
         })
     }
 
@@ -34,7 +45,7 @@ export default function Inventories({inventories}) {
     }
 
     function captureEdit(clickedInventory) {
-        let filtered = inventories && inventories.filter
+        let filtered = inventories.filter
         (inventory => inventory.id === clickedInventory.id)
         setEditForm(filtered[0])
     }
@@ -43,19 +54,26 @@ export default function Inventories({inventories}) {
 
     const inventoryArray = [inventories]
     console.log("Test arry",inventoryArray)
+    console.log("editForm", editForm)
 
     return (
+
+        
+
         <div id="InvTable">
+            <div>
             {isEditing?
-            (<EditInventory
-                editForm={editForm}
-                handleChange={handleChange}
-                handleUserUpdate={handleUserUpdate}
-            />) : null}
+                (<EditInventory
+                    editForm={editForm}
+                    handleChange={handleChange}
+                    handleUserUpdate={handleUserUpdate}
+                />) : null}
+            </div>
             <table>
                 <thead>
                     <tr>
                         {/* Headers for each collum */}
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Weight</th>
@@ -66,16 +84,17 @@ export default function Inventories({inventories}) {
                     {
                         inventories && inventories.map(inventory =>
                             <InventoryTable
-                            key={inventory._id}
-                            inventory={inventory}
-                            captureEdit={captureEdit}
-                            changeEditState={changeEditState}
+                                key={inventory.id}
+                                inventory={inventory}
+                                captureEdit={captureEdit}
+                                changeEditState={changeEditState}
                              />)
                     }
+                    <div></div>
                 </tbody>
                 <tfoot id="InvFoot">
                     <tr>
-                        {/* <td id="weightText">Weight:</td>
+                        <td id="weightText">Weight:</td>
                         {Object.values(inventoryArray).map(values => {
                             console.log(values, "weight")
                             var weightTotal = 0;
@@ -89,10 +108,11 @@ export default function Inventories({inventories}) {
                                     {weightTotal}
                                 </td>
                                 )}
-                            )} */}
+                            )}
                     </tr>
                 </tfoot> 
             </table>
         </div>
     )
-}   
+
+}
