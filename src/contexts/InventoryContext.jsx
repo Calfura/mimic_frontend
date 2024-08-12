@@ -32,7 +32,7 @@ export default function Inventories({inventories, updateInventory}) {
     function handleChange(event) {
         setEditForm({
             ...editForm,
-            [event.target._id]: event.target.value
+            [event.target.item]: event.target.value
         })
     }
 
@@ -56,9 +56,7 @@ export default function Inventories({inventories, updateInventory}) {
     console.log("Test arry",inventoryArray)
     console.log("editForm", editForm)
 
-    return (
-
-        
+    return (    
 
         <div id="InvTable">
             <div>
@@ -73,7 +71,6 @@ export default function Inventories({inventories, updateInventory}) {
                 <thead>
                     <tr>
                         {/* Headers for each collum */}
-                        <th>ID</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Weight</th>
@@ -82,7 +79,7 @@ export default function Inventories({inventories, updateInventory}) {
                 <tbody>
                     {/* iterate through the Inventory datatable and renders it */}
                     {
-                        inventories && inventories.map(inventory =>
+                        inventories.map(inventory =>
                             <InventoryTable
                                 key={inventory.id}
                                 inventory={inventory}
@@ -93,23 +90,25 @@ export default function Inventories({inventories, updateInventory}) {
                     <div></div>
                 </tbody>
                 <tfoot id="InvFoot">
-                    <tr>
-                        <td id="weightText">Weight:</td>
-                        {Object.values(inventoryArray).map(values => {
-                            console.log(values, "weight")
-                            var weightTotal = 0;
-                            for (let i = 0; i < values.length; i++) {
-                                weightTotal += values[i].weight;
-                                console.log(values[i].weight, "increase index", weightTotal)
-                                weightTotal + values[i].weight + i;
-                                }
-                            return (
-                                <td>
-                                    {weightTotal}
-                                </td>
+                    <div id="weightCalc">
+                        <tr key="weightContainer">
+                            <td id="weightText">Weight:</td>
+                            {Object.values(inventoryArray).map(values => {
+                                console.log(values, "weight")
+                                var weightTotal = 0;
+                                for (let i = 0; i < values.length; i++) {
+                                    weightTotal += values[i].weight;
+                                    console.log(values[i].weight, "increase index", weightTotal)
+                                    weightTotal + values[i].weight + i;
+                                    }
+                                return (
+                                    <td>
+                                        {weightTotal}
+                                    </td>
+                                    )}
                                 )}
-                            )}
-                    </tr>
+                        </tr>
+                    </div>
                 </tfoot> 
             </table>
         </div>

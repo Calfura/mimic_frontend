@@ -1,6 +1,7 @@
 import { useState } from "react";
 import React, { useUserDispatch } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+import "../styles/HomePage.css"
 
 
 export default function LoginPage() {
@@ -40,7 +41,7 @@ export default function LoginPage() {
                     <input type="password" name="password" id="password" value={password} onChange={(event) => setPassword(event.target.value)}/>
 
                     <div id="emptySpace" />
-                    <button type="submit">Login</button>
+                    <button type="submit" id="loginBtn">Login</button>
                     <div>
                         <button onClick={() => handleNavigate("/signup")}>Sign Up</button>
                     </div>

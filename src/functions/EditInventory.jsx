@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState, useContext } from "react";
-// import { useItemDispatch } from "../contexts/InventoryContext";
 
 export function useItemData(){
     return useContext(ItemDataContext)
@@ -10,8 +9,8 @@ export function useItemDispatch(){
     return useContext(ItemDispatchContext);
 };
 
-export default function EditInventory({ editForm, handleChange, handleCustomerUpdate }) {
-    const { id, item, description, weight } = editForm;
+export default function EditInventory({ editForm, updatedInventory, handleUserUpdate }) {
+    let { id, item, description, weight } = editForm;
     
     const [formData, setFormData] = useState({
         id: "",
@@ -28,6 +27,8 @@ export default function EditInventory({ editForm, handleChange, handleCustomerUp
         console.log(formData)
         let response = await axios.patch(`http://localhost:3000/inventory/${formData.id}`, formData)
         .then(response => console.log(response.data))
+        .then(updatedInventory => {
+            handleUserUpdate(updatedInventory)})
         .catch(error => console.error(error))
 
         console.log("Editing result: " + JSON.stringify(formData));

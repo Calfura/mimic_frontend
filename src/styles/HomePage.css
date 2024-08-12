@@ -1,28 +1,33 @@
-div#Login {
+#LoginBox{
     display: flex;
-    height: 6rem;
-    width: 15rem;
-    flex-direction: column;
-    align-items: center;
-    align-self: center;
-    background-color: aqua;
+    justify-content: center;
 
-}
+    #LoginContent {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
-input.formUsername {
-    width: 10rem;
-    align-self: center;
-    margin: 2rem;
-}
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 10rem;
+    }
 
-input.formPassword {
-    width: 10rem;
-    align-self: center;
-    padding: 2rem;
-}
+    label {
+        margin: 1px;
+    }
 
-.LoginButton {
-    width: 7rem;
-    align-self: center;
-    padding: 2rem;
+    input {
+        margin: 2px;
+    }
+
+    button {
+        margin-top: 6px;
+    }
+
+    #loginBtn{
+        width: 5rem;
+        align-self: center;
+    }
 }

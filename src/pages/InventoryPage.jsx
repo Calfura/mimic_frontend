@@ -12,15 +12,18 @@ export default function InventoryPage() {
     useEffect(() => {
         fetch("http://localhost:3000/inventory/all")
         .then(resp => resp.json())
-        .then(data => setInventories(data.data))
-    }, [setInventories])
+        .then((data) => setInventories(data.data))
+    }, [])
 
     function updateInventory(updatedInventory) {
         const updatedInventories = inventories.map(
             inventory => {
                 if (inventory.id === updatedInventory.id) {
+                    console.log("updatedInventory")
                     return updatedInventory
-                } else {return inventory}
+                } else {
+                    console.log("updateInventory Else")
+                    return inventory}
         })
         setInventories(updatedInventories)
     }
