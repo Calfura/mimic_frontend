@@ -62,7 +62,7 @@ export default function UserProvider({children}){
         let bodyData = { username, password };
 
         try {
-            let response = await axios.post(`http://localhost:3000/users/jwt`, bodyData);
+            let response = await axios.post(`${API_BASE_URL}/users/jwt`, bodyData);
 
             const loginResult = response.data;
             console.log("Fetch", response)

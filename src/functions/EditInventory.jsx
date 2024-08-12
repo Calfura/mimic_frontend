@@ -25,7 +25,7 @@ export default function EditInventory({ editForm, updatedInventory, handleUserUp
         event.preventDefault()
         formData.id = editForm._id
         console.log(formData)
-        let response = await axios.patch(`http://localhost:3000/inventory/${formData.id}`, formData)
+        let response = await axios.patch(`${API_BASE_URL}/inventory/${formData.id}`, formData)
         .then(response => console.log(response.data))
         .then(updatedInventory => {
             handleUserUpdate(updatedInventory)})

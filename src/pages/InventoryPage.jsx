@@ -10,7 +10,7 @@ export default function InventoryPage() {
 
     // Fetching inventory data from "GET"
     useEffect(() => {
-        fetch("http://localhost:3000/inventory/all")
+        fetch(`${API_BASE_URL}/inventory/all`)
         .then(resp => resp.json())
         .then((data) => setInventories(data.data))
     }, [])

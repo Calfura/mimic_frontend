@@ -7,7 +7,7 @@ export default function CharacterPage(){
     const [character, setCharacter] = useState([]);
   
     useEffect(() => {
-      fetch("http://localhost:3000/character/all")
+      fetch(`${API_BASE_URL}/character/all`)
       .then(resp => resp.json())
       .then(data => setCharacter(data.data))
     }, [setCharacter])
