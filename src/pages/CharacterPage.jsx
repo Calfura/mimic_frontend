@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Characters from "../contexts/CharacterContext";
+import { API_BASE_URL } from "../contexts/variables";
 
 
 export default function CharacterPage(){

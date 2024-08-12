@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Inventories from "../contexts/InventoryContext";
+import { API_BASE_URL } from "../contexts/variables";
 
 
 export default function InventoryPage() {

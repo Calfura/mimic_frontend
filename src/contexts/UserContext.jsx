@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, createContext, useContext } from "react";
+import { API_BASE_URL } from "./variables";
 
 
 const UserDataContext = createContext(null);
@@ -42,7 +43,7 @@ export default function UserProvider({children}){
     }
 
     const makeSignupRequest = async (username, password) => {
-        let signUpResult = await fetch("http://localhost:3000/users/", {
+        let signUpResult = await fetch(`${API_BASE_URL}/users/`, {
             method: "POST",
             body: JSON.stringify({username, password}),
             headers: {
