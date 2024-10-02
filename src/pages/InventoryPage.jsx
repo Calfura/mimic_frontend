@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Inventories from "../contexts/InventoryContext";
-import { API_BASE_URL } from "../contexts/variables";
+// import { API_BASE_URL } from "../contexts/variables";
 
 
 export default function InventoryPage() {
@@ -11,11 +11,12 @@ export default function InventoryPage() {
 
     // Fetching inventory data from "GET"
     useEffect(() => {
-        fetch(`${API_BASE_URL}/inventory/all`)
+        fetch(`http://localhost:3000/inventory/all`)
         .then(resp => resp.json())
         .then((data) => setInventories(data.data))
     }, [])
 
+    // Checking that inventory ID is exact match for updating.
     function updateInventory(updatedInventory) {
         const updatedInventories = inventories.map(
             inventory => {

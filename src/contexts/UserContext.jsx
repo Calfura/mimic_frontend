@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, createContext, useContext } from "react";
-import { API_BASE_URL } from "./variables";
+// import { API_BASE_URL } from "./variables";
 
 
 const UserDataContext = createContext(null);
@@ -14,7 +14,7 @@ export function useUserDispatch(){
     return useContext(UserDispatchContext);
 };
 
-
+// Setup for User login using JWT token and encrption
 export default function UserProvider({children}){
 
     const [userJwt, setUserJwt] = useState(localStorage.getItem("userJwt") || "");
@@ -43,7 +43,7 @@ export default function UserProvider({children}){
     }
 
     const makeSignupRequest = async (username, password) => {
-        let signUpResult = await fetch(`${API_BASE_URL}/users/`, {
+        let signUpResult = await fetch(`http://localhost:3000/users/`, {
             method: "POST",
             body: JSON.stringify({username, password}),
             headers: {
@@ -59,11 +59,13 @@ export default function UserProvider({children}){
         setDecodedJwt(signUpResult.decodedJwt);
     }
 
+    // Login request from end user
     const makeLoginRequest = async (username, password) => {
         let bodyData = { username, password };
 
+        // Checking login attempt
         try {
-            let response = await axios.post(`${API_BASE_URL}/users/jwt`, bodyData);
+            let response = await axios.post(`http://localhost:3000/users/jwt`, bodyData);
 
             const loginResult = response.data;
             console.log("Fetch", response)

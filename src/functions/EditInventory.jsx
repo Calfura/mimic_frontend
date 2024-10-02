@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useContext } from "react";
-import { API_BASE_URL } from "../contexts/variables";
+// import { API_BASE_URL } from "../contexts/variables";
 
 export function useItemData(){
     return useContext(ItemDataContext)
@@ -21,12 +21,12 @@ export default function EditInventory({ editForm, updatedInventory, handleUserUp
     })
 
 
-
+    // Updates the Item selected with new information
     const handleSubmit = async (event) => {
         event.preventDefault()
         formData.id = editForm._id
         console.log(formData)
-        let response = await axios.patch(`${API_BASE_URL}/inventory/${formData.id}`, formData)
+        let response = await axios.patch(`http://localhost:3000/inventory/${formData.id}`, formData)
         .then(response => console.log(response.data))
         .then(updatedInventory => {
             handleUserUpdate(updatedInventory)})
@@ -35,7 +35,8 @@ export default function EditInventory({ editForm, updatedInventory, handleUserUp
         console.log("Editing result: " + JSON.stringify(formData));
     }
 
-
+    // Pop up window for updating item information and setting data.
+    // Correctly updating information. Bug for updating anything else other than the first item
     return (
         <div id="addItem">
             <h4>Edit Item</h4>

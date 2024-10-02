@@ -10,6 +10,7 @@ export default function HomePage(){
         
         const {makeLoginRequest} = useUserDispatch();
 
+        // Login request
         return (
           <>
           <div id="Login">
